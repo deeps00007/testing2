@@ -1,11 +1,14 @@
-function greet() {
-  return 'Hello World';
+export default async function(inputs) {
+  return `Hello ${inputs.name || 'World'}`;
 }
-module.exports = greet;
 
 // greet.test.js
-const greet = require('./greet');
+import greet from './greet';
 
-test('greets with Hello World', () => {
-  expect(greet()).toBe('Hello World');
+test('greets with Hello World by default', async () => {
+  expect(await greet({})).toBe('Hello World');
+});
+
+test('greets with name', async () => {
+  expect(await greet({ name: 'Meta' })).toBe('Hello Meta');
 });
